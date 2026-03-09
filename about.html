@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Korean Connect ♡ Home</title>
+  <title>Korean Connect ♡ About</title>
   
   <!-- Google Fonts - supports Korean & Traditional Chinese -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -126,34 +126,6 @@
       opacity: 0.96;
     }
 
-    .download-group {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
-
-    .btn-download {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: var(--light);
-      color: var(--primary-red);
-      padding: 18px 48px;
-      border-radius: 999px;
-      font-size: 1.35rem;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 12px 36px var(--glow);
-      transition: all 0.4s ease;
-    }
-
-    .btn-download:hover {
-      transform: translateY(-10px) scale(1.07);
-      box-shadow: 0 24px 60px var(--glow);
-      background: linear-gradient(90deg, #fffaf5, #ffffff);
-    }
-
     /* Sections */
     section {
       padding: 100px 6%;
@@ -178,66 +150,65 @@
       opacity: 0.92;
     }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 36px;
-      max-width: 1280px;
+    .about-content {
+      max-width: 900px;
       margin: 0 auto;
+      text-align: left;
+      font-size: 1.2rem;
+      line-height: 1.8;
     }
 
-    .feature-card {
+    .about-content h3 {
+      color: var(--teal);
+      font-size: 1.8rem;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 36px;
+      max-width: 1000px;
+      margin: 60px auto 0;
+    }
+
+    .team-card {
       background: rgba(255,255,255,0.9);
-      border-radius: 32px;
-      padding: 44px 32px;
+      border-radius: 28px;
+      padding: 36px;
       box-shadow: 0 16px 44px rgba(0,0,0,0.08);
       backdrop-filter: blur(12px);
       transition: all 0.4s ease;
       border: 1px solid rgba(255,154,162,0.18);
+      text-align: center;
     }
 
-    .feature-card:hover {
-      transform: translateY(-18px);
+    .team-card:hover {
+      transform: translateY(-12px);
       box-shadow: 0 28px 68px var(--glow-mint);
       border-color: var(--mint);
     }
 
-    .app-screenshot {
-      width: 100%;
-      max-width: 280px;
-      border-radius: 28px;
-      margin: 28px auto 24px;
-      display: block;
-      box-shadow: 0 14px 48px rgba(0,0,0,0.18);
-      border: 1px solid rgba(168,230,207,0.35);
+    .team-card .avatar {
+      font-size: 4rem;
+      margin-bottom: 16px;
     }
 
-    .icon-big {
-      font-size: 4.5rem;
-      margin-bottom: 28px;
-      color: var(--teal);
-    }
-
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 60px;
-      flex-wrap: wrap;
-      margin: 60px 0;
-    }
-
-    .stat-item {
-      background: rgba(255,255,255,0.7);
-      padding: 24px 40px;
-      border-radius: 24px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-    }
-
-    .stat-item strong {
-      font-size: 2.6rem;
+    .team-card h4 {
       color: var(--primary-pink);
-      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .team-card p {
+      color: #666;
+      margin: 0;
     }
 
     footer {
@@ -252,107 +223,85 @@
       h1          { font-size: 4rem; }
       .subtitle   { font-size: 1.6rem; }
       .nav-links  { gap: 24px; font-size: 0.98rem; }
-      .btn-download { padding: 15px 36px; font-size: 1.2rem; }
     }
 
     @media (max-width: 600px) {
       nav         { flex-direction: column; gap: 16px; padding: 20px 5%; }
       .nav-links  { flex-direction: column; gap: 16px; }
       h1          { font-size: 3.2rem; }
+      .about-content { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation – copy this block to other pages -->
+  <!-- Navigation -->
   <nav>
     <a href="index.html" class="logo">Korean<span>Connect</span></a>
     
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="vocab.html">Vocabulary</a></li>
       <li><a href="resources.html">Resources</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html" class="active">About</a></li>
     </ul>
   </nav>
 
   <!-- Hero -->
   <header class="hero">
-    <h1>Korean Connect</h1>
-    <p class="subtitle">Welcome to Korean Connect! Learn Korean the fun way with game-based learning, real conversations, and a global community. Our app offers a unique experience that integrates Korean culture, making language learning engaging and relevant. Join us and start your journey today!</p>
-    
-    <div class="download-group">
-      <a href="https://your-app-link.com/appstore" class="btn-download" target="_blank">
-        <i class="fab fa-apple"></i> App Store
-      </a>
-      <a href="https://your-app-link.com/googleplay" class="btn-download" target="_blank">
-        <i class="fab fa-google-play"></i> Google Play
-      </a>
-    </div>
+    <h1>About Korean Connect</h1>
+    <p class="subtitle">Our mission is to make learning Korean fun, engaging, and accessible to everyone around the world ♡</p>
   </header>
 
-  <!-- Features -->
+  <!-- Our Story -->
   <section>
-    <h2>So Much Love Inside</h2>
-    <div class="features-grid">
-
-      <div class="feature-card">
-        <div class="icon-big"><i class="fas fa-heart"></i></div>
-        <h3>Pastel Flashcards & Daily Hearts</h3>
-        <p>Adorable vocab cards with K-drama lines, idol words & your own custom lists ♡</p>
-        <img src="https://i.etsystatic.com/37117617/r/il/8a0ee9/6975799901/il_fullxfull.6975799901_h72k.jpg" 
-             alt="Cute Korean color vocabulary flashcards" class="app-screenshot">
-      </div>
-
-      <div class="feature-card">
-        <div class="icon-big"><i class="fas fa-comment-dots"></i></div>
-        <h3>Sweet AI + Real Friends Chat</h3>
-        <p>Practice pronunciation with kind AI or make global besties for real talks</p>
-        <img src="https://i.etsystatic.com/19702373/r/il/5a0ff9/6125510220/il_fullxfull.6125510220_nqgg.jpg" 
-             alt="Kawaii Hangul learning interface" class="app-screenshot">
-      </div>
-
-      <div class="feature-card">
-        <div class="icon-big"><i class="fas fa-trophy"></i></div>
-        <h3>Rewards & Friendly Battles</h3>
-        <p>Win stickers, K-pop merch, LINE themes & café coupons by playing every day!</p>
-        <img src="https://thumbs.dreamstime.com/b/delightful-set-cute-app-icons-ui-elements-kawaii-style-includes-social-media-icons-upload-search-heart-star-volume-421624776.jpg" 
-             alt="Kawaii app icons and reward elements" class="app-screenshot">
-      </div>
-
+    <h2>Our Story</h2>
+    <div class="about-content">
+      <p>Korean Connect was born out of a passion for Korean language and culture. We believe that language learning should be joyful, not stressful. Our team created an app that combines cute aesthetics with powerful learning features to make Korean accessible to learners of all levels.</p>
+      
+      <h3>🎯 Our Mission</h3>
+      <p>To empower people worldwide to learn Korean through engaging, interactive, and culturally relevant content while building a supportive global community.</p>
+      
+      <h3>💖 Our Values</h3>
+      <p><strong>Cuteness & Joy:</strong> Learning should be fun and delightful. We incorporate cute design and kawaii aesthetics throughout our app.</p>
+      <p><strong>Cultural Authenticity:</strong> We celebrate real Korean culture, from K-pop to K-dramas, making learning relevant and exciting.</p>
+      <p><strong>Community First:</strong> Language learning is better together. We foster connections between learners around the globe.</p>
+      <p><strong>Accessibility:</strong> Quality education should be available to everyone, regardless of background or budget.</p>
+      
+      <h3>🌟 What Makes Us Different</h3>
+      <p>Unlike traditional language apps, Korean Connect blends gamification, AI-powered practice, real human connections, and K-pop/K-drama vocabulary to create an unforgettable learning experience. Our cute interface and reward system make every study session feel like a celebration!</p>
     </div>
   </section>
 
-  <!-- Quick Stats Teaser -->
-  <section style="background: rgba(168,230,207,0.06);">
-    <h2>Everyone's Falling in Love</h2>
-    <div class="stats">
-      <div class="stat-item">
-        <strong>180K+</strong> Global Hearts
+  <!-- Team -->
+  <section>
+    <h2>Our Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="avatar">👩‍💻</div>
+        <h4>Founder & Creative Lead</h4>
+        <p>Bringing passion for Korean culture and design innovation</p>
       </div>
-      <div class="stat-item">
-        <strong>4.9 ★</strong> Sweet Rating
+      <div class="team-card">
+        <div class="avatar">🎨</div>
+        <h4>Design & UX</h4>
+        <p>Creating the kawaii experience you love</p>
       </div>
-      <div class="stat-item">
-        <strong>120+</strong> Days Streak Record
+      <div class="team-card">
+        <div class="avatar">🚀</div>
+        <h4>Engineering</h4>
+        <p>Building powerful features with care and precision</p>
       </div>
     </div>
   </section>
 
-  <!-- Footer CTA -->
+  <!-- Footer -->
   <footer>
     <p style="font-size:1.4rem; margin-bottom:24px;">
-      Ready to start your Korean love story? ♡<br>
-      Download now & get 500 free hearts + 7 days premium!
+      Join our community and start your Korean journey today! ♡
     </p>
-    
-    <div class="download-group" style="margin-bottom:48px;">
-      <a href="#" class="btn-download"><i class="fab fa-apple"></i> Start Free Today</a>
-      <a href="#" class="btn-download"><i class="fab fa-google-play"></i> Start Free Today</a>
-    </div>
-
-    <p>화이팅! Let's fall in love with Korean together 💕<br>
-    Korean Connect © 2026 • Made with ♡ in Hong Kong</p>
+    <p>화이팅! Made with ♡ for Korean learners everywhere<br>
+    Korean Connect © 2026</p>
   </footer>
 
 </body>
