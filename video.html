@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Korean Connect ♡ Video Demo</title>
+  
+  <!-- Google Fonts - supports Korean & Traditional Chinese -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-soft:      #fffaf5;
+      --primary-pink:  #ff9aa2;
+      --primary-red:   #ff6b6b;
+      --mint:          #a8e6cf;
+      --teal:          #2a9d8f;
+      --light:         #ffffff;
+      --text-dark:     #2d3436;
+      --glow:          rgba(255, 154, 162, 0.25);
+      --glow-mint:     rgba(168, 230, 207, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', 'Noto Sans KR', system-ui, sans-serif;
+      background: linear-gradient(135deg, var(--bg-soft) 0%, #f0fff5 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* ────────────────────────────────────────────────
+       Navigation
+    ──────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,154,162,0.18);
+      z-index: 1000;
+      padding: 16px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-pink);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-pink);
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+    header.hero {
+      background: linear-gradient(135deg, var(--primary-pink) 20%, var(--mint) 80%);
+      color: white;
+      text-align: center;
+      padding: 180px 6% 140px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px; /* space for fixed nav */
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.55) 0%, transparent 65%);
+      animation: gentleFloat 22s infinite linear;
+      pointer-events: none;
+    }
+
+    @keyframes gentleFloat {
+      0%   { transform: translate(0,0) rotate(0deg); }
+      100% { transform: translate(140%, 90%) rotate(360deg); }
+    }
+
+    h1 {
+      font-size: 5.2rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-shadow: 0 6px 24px rgba(0,0,0,0.3);
+    }
+
+    .subtitle {
+      font-size: 1.95rem;
+      max-width: 920px;
+      margin: 0 auto 56px;
+      opacity: 0.96;
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 6%;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 3.4rem;
+      color: var(--primary-pink);
+      margin-bottom: 64px;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '♡';
+      position: absolute;
+      bottom: -20px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.6rem;
+      color: var(--mint);
+      opacity: 0.92;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .video-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 16px 44px rgba(0,0,0,0.08);
+      backdrop-filter: blur(12px);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255,154,162,0.18);
+    }
+
+    .video-card:hover {
+      transform: translateY(-16px);
+      box-shadow: 0 28px 68px var(--glow-mint);
+      border-color: var(--mint);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: var(--primary-pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+      transition: all 0.3s;
+      z-index: 10;
+    }
+
+    .video-card:hover .play-button {
+      transform: translate(-50%, -50%) scale(1.2);
+      background: var(--primary-red);
+    }
+
+    .video-info {
+      padding: 32px;
+    }
+
+    .video-info h3 {
+      color: var(--teal);
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .video-info p {
+      color: #666;
+      font-size: 1rem;
+      text-align: left;
+      margin-bottom: 16px;
+    }
+
+    .video-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+
+    .duration {
+      background: rgba(255,154,162,0.1);
+      color: var(--primary-pink);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .view-btn {
+      background: var(--mint);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .view-btn:hover {
+      background: var(--teal);
+      transform: translateY(-3px);
+    }
+
+    footer {
+      padding: 100px 6% 80px;
+      background: linear-gradient(to top, #f0fff5, transparent);
+      text-align: center;
+      color: #555;
+      font-size: 1.15rem;
+    }
+
+    @media (max-width: 900px) {
+      h1          { font-size: 4rem; }
+      .subtitle   { font-size: 1.6rem; }
+      .nav-links  { gap: 24px; font-size: 0.98rem; }
+      .video-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      nav         { flex-direction: column; gap: 16px; padding: 20px 5%; }
+      .nav-links  { flex-direction: column; gap: 16px; }
+      h1          { font-size: 3.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">Korean<span>Connect</span></a>
+    
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="vocab.html">Vocabulary</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="video.html" class="active">Videos</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1>Learn Korean With Videos</h1>
+    <p class="subtitle">Watch our curated collection of fun Korean learning videos and demos! Perfect for beginners and advanced learners ♡</p>
+  </header>
+
+  <!-- Video Grid -->
+  <section>
+    <h2>Featured Learning Videos</h2>
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>Beginner Korean Basics</h3>
+          <p>Learn essential Korean phrases and grammar for everyday conversations.</p>
+          <div class="video-meta">
+            <span class="duration">12:45</span>
+            <a href="https://www.youtube.com/embed/dQw4w9WgXcQ" target="_blank" class="view-btn">Watch Full</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>Korean Pronunciation Guide</h3>
+          <p>Master the sounds of Korean with our step-by-step pronunciation tutorial.</p>
+          <div class="video-meta">
+            <span class="duration">8:30</span>
+            <a href="https://www.youtube.com/embed/dQw4w9WgXcQ" target="_blank" class="view-btn">Watch Full</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>K-Drama Vocabulary</h3>
+          <p>Learn real Korean words and phrases used in your favorite K-drama series!</p>
+          <div class="video-meta">
+            <span class="duration">15:20</span>
+            <a href="https://www.youtube.com/embed/dQw4w9WgXcQ" target="_blank" class="view-btn">Watch Full</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>Korean Connect App Demo</h3>
+          <p>See how to use our app and maximize your Korean learning journey!</p>
+          <div class="video-meta">
+            <span class="duration">10:15</span>
+            <a href="https://www.youtube.com/embed/dQw4w9WgXcQ" target="_blank" class="view-btn">Watch Full</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>Writing Hangul Like a Pro</h3>
+          <p>Complete guide to writing the Korean alphabet beautifully and correctly.</p>
+          <div class="video-meta">
+            <span class="duration">14:00</span>
+            <a href="https://www.youtube.com/embed/dQw4w9WgXcQ" target="_blank" class="view-btn">Watch Full</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>Advanced Conversational Korean</h3>
+          <p>Level up your speaking skills with real conversation examples and tips.</p>
+          <div class="video-meta">
+            <span class="duration">18:45</span>
+            <a href="https://www.youtube.com/embed/dQw4w9WgXcQ" target="_blank" class="view-btn">Watch Full</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p style="font-size:1.4rem; margin-bottom:24px;">
+      Love learning with videos? Download our app for more! ♡
+    </p>
+    <p>화이팅! Keep practicing with Korean Connect<br>
+    Korean Connect © 2026 • Made with ♡ for language lovers</p>
+  </footer>
+
+</body>
+</html>
