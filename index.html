@@ -454,6 +454,7 @@
     .download-btn {
       display: flex;
       align-items: center;
+      justify-content: center;
       background: white;
       border-radius: 16px;
       padding: 16px 24px;
@@ -461,6 +462,7 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
       border: 1px solid #e0e0e0;
+      min-width: 180px;
     }
 
     .download-btn:hover {
@@ -468,15 +470,8 @@
       box-shadow: 0 16px 32px rgba(0,0,0,0.15);
     }
 
-    .app-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      margin-right: 16px;
-    }
-
     .btn-text {
-      text-align: left;
+      text-align: center;
     }
 
     .small-text {
@@ -651,7 +646,6 @@
     
     <div class="download-buttons">
       <div class="download-btn google-play">
-        <img src="https://play-lh.googleusercontent.com/8e8e8e8e-8e8e-8e8e-8e8e-8e8e8e8e8e8e=w240-h480-rw" alt="Download on Google Play" class="app-icon">
         <div class="btn-text">
           <span class="small-text">Get it on</span>
           <span class="big-text">Google Play</span>
@@ -659,7 +653,6 @@
       </div>
       
       <div class="download-btn app-store">
-        <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/8e/8e/8e/8e8e8e8e-8e8e-8e8e-8e8e-8e8e8e8e8e8e/512x512bb.jpg" alt="Download on the App Store" class="app-icon">
         <div class="btn-text">
           <span class="small-text">Download on the</span>
           <span class="big-text">App Store</span>
