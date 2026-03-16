@@ -189,6 +189,102 @@
       border: 1px solid rgba(168,230,207,0.35);
     }
 
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+      justify-items: center;
+    }
+
+    .resource-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 16px 44px rgba(0,0,0,0.08);
+      backdrop-filter: blur(12px);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255,154,162,0.18);
+      max-width: 500px;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-16px);
+      box-shadow: 0 28px 68px var(--glow-mint);
+      border-color: var(--mint);
+    }
+
+    .resource-container {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      background: #f8f9fa;
+    }
+
+    .resource-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 20px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+      background: white;
+    }
+
+    .resource-card:hover .resource-thumbnail {
+      opacity: 0.8;
+    }
+
+    .resource-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 24px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .resource-card:hover .resource-overlay {
+      transform: translateY(0);
+    }
+
+    .resource-overlay h3 {
+      color: white;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    .resource-overlay p {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      text-align: left;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .resource-btn {
+      display: inline-block;
+      background: var(--primary-pink);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .resource-btn:hover {
+      background: var(--primary-red);
+      transform: scale(1.05);
+    }
+
     footer {
       padding: 80px 6% 60px;
       background: linear-gradient(to top, #f0fff5, transparent);
@@ -274,6 +370,25 @@
         <p>Quick matching, typing, multiple-choice or listening quizzes — adorable progress hearts, badges and mastery stats to keep you motivated!</p>
         <img src="https://thumbs.dreamstime.com/b/delightful-set-cute-app-icons-ui-elements-kawaii-style-includes-social-media-icons-upload-search-heart-star-volume-421624776.jpg" 
              alt="Kawaii gamified quiz icons and elements" class="screenshot">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Featured Resources -->
+  <section>
+    <h2>Recommended Learning Resources</h2>
+    <div class="resource-grid">
+
+      <div class="resource-card">
+        <div class="resource-container">
+          <img src="https://howtostudykorean.com/wp-content/uploads/2020/08/htsk-logo.png" alt="HowToStudyKorean" class="resource-thumbnail" onclick="window.open('https://www.howtostudykorean.com/', '_blank')">
+          <div class="resource-overlay">
+            <h3>HowToStudyKorean</h3>
+            <p>Comprehensive free Korean learning resources with detailed grammar lessons, vocabulary lists, and study guides.</p>
+            <a href="https://www.howtostudykorean.com/" target="_blank" class="resource-btn">Visit Website</a>
+          </div>
+        </div>
       </div>
 
     </div>
