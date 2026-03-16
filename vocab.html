@@ -1,14 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Korean Connect ♡ Vocabulary</title>
-  
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -23,6 +22,9 @@
       --text-dark:     #2d3436;
       --glow:          rgba(255, 154, 162, 0.25);
       --glow-mint:     rgba(168, 230, 207, 0.3);
+      --soft-blue:     #e8f4fd;
+      --lavender:      #f0e6ff;
+      --peach:         #fff0e6;
     }
 
     * {
@@ -38,13 +40,13 @@
       line-height: 1.6;
     }
 
-    /* Navigation – identical to Home */
+    /* Navigation */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,154,162,0.18);
       z-index: 1000;
@@ -86,12 +88,12 @@
       transform: translateY(-2px);
     }
 
-    /* Page Header */
-    header.hero {
+    /* Hero Section */
+    .hero {
       background: linear-gradient(135deg, var(--primary-pink) 30%, var(--mint) 70%);
       color: white;
       text-align: center;
-      padding: 160px 6% 100px;
+      padding: 180px 6% 140px;
       position: relative;
       overflow: hidden;
       margin-top: 80px;
@@ -101,37 +103,47 @@
       content: '';
       position: absolute;
       inset: -50%;
-      background: radial-gradient(circle at 40% 60%, rgba(255,255,255,0.5) 0%, transparent 70%);
-      animation: gentleFloat 24s infinite linear;
-      pointer-events: none;
+      background: radial-gradient(circle at 40% 60%, rgba(255,255,255,0.3) 0%, transparent 70%);
+      animation: float 20s infinite linear;
     }
 
-    @keyframes gentleFloat {
-      0%   { transform: translate(0,0) rotate(0deg); }
-      100% { transform: translate(130%, 100%) rotate(360deg); }
+    @keyframes float {
+      0% { transform: translate(0,0) rotate(0deg); }
+      100% { transform: translate(100%, 50%) rotate(360deg); }
     }
 
-    h1 {
-      font-size: 4.8rem;
+    .hero h1 {
+      font-size: 4.2rem;
       font-weight: 800;
-      margin-bottom: 16px;
-      text-shadow: 0 6px 24px rgba(0,0,0,0.25);
+      margin-bottom: 20px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 2;
     }
 
-    .subtitle {
-      font-size: 1.8rem;
-      max-width: 880px;
-      margin: 0 auto 48px;
+    .hero .subtitle {
+      font-size: 1.6rem;
+      max-width: 800px;
+      margin: 0 auto 40px;
       opacity: 0.95;
+      position: relative;
+      z-index: 2;
     }
 
-    /* Main content */
-    section {
+    .hero .korean-text {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    /* Vocabulary Categories */
+    .vocab-section {
       padding: 100px 6%;
       text-align: center;
     }
 
-    h2 {
+    .vocab-section h2 {
       font-size: 3.2rem;
       color: var(--primary-pink);
       margin-bottom: 60px;
@@ -139,137 +151,100 @@
       display: inline-block;
     }
 
-    h2::after {
-      content: '♡';
+    .vocab-section h2::after {
+      content: '📚';
       position: absolute;
-      bottom: -18px; left: 50%;
-      transform: translateX(-50%);
-      font-size: 2.4rem;
-      color: var(--mint);
-      opacity: 0.9;
+      top: -10px;
+      right: -40px;
+      font-size: 2rem;
     }
 
-    .features-grid {
+    .vocab-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 36px;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .feature-card {
-      background: rgba(255,255,255,0.9);
-      border-radius: 32px;
-      padding: 44px 32px;
-      box-shadow: 0 16px 44px rgba(0,0,0,0.08);
-      backdrop-filter: blur(12px);
-      transition: all 0.4s ease;
-      border: 1px solid rgba(255,154,162,0.18);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-18px);
-      box-shadow: 0 28px 68px var(--glow-mint);
-      border-color: var(--mint);
-    }
-
-    .icon-big {
-      font-size: 4.5rem;
-      margin-bottom: 28px;
-      color: var(--teal);
-    }
-
-    .screenshot {
-      width: 100%;
-      max-width: 280px;
-      border-radius: 28px;
-      margin: 28px auto 24px;
-      display: block;
-      box-shadow: 0 14px 48px rgba(0,0,0,0.18);
-      border: 1px solid rgba(168,230,207,0.35);
-    }
-
-    .resource-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 40px;
-      max-width: 1280px;
+      max-width: 1400px;
       margin: 0 auto;
-      justify-items: center;
     }
 
-    .resource-card {
-      background: rgba(255,255,255,0.95);
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 16px 44px rgba(0,0,0,0.08);
-      backdrop-filter: blur(12px);
+    .vocab-category {
+      background: var(--light);
+      border-radius: 24px;
+      padding: 40px 30px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
       transition: all 0.4s ease;
-      border: 1px solid rgba(255,154,162,0.18);
-      max-width: 500px;
-    }
-
-    .resource-card:hover {
-      transform: translateY(-16px);
-      box-shadow: 0 28px 68px var(--glow-mint);
-      border-color: var(--mint);
-    }
-
-    .resource-container {
+      border: 2px solid transparent;
       position: relative;
-      width: 100%;
-      height: 250px;
       overflow: hidden;
-      background: #f8f9fa;
     }
 
-    .resource-thumbnail {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 20px;
-      cursor: pointer;
-      transition: opacity 0.3s;
-      background: white;
-    }
-
-    .resource-card:hover .resource-thumbnail {
-      opacity: 0.8;
-    }
-
-    .resource-overlay {
+    .vocab-category::before {
+      content: '';
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-      color: white;
-      padding: 24px;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-pink), var(--mint));
     }
 
-    .resource-card:hover .resource-overlay {
-      transform: translateY(0);
+    .vocab-category:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.15);
+      border-color: var(--mint);
     }
 
-    .resource-overlay h3 {
-      color: white;
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-      text-align: left;
+    .category-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      display: block;
     }
 
-    .resource-overlay p {
-      color: rgba(255,255,255,0.9);
-      font-size: 0.95rem;
-      text-align: left;
+    .vocab-category h3 {
+      font-size: 1.8rem;
+      color: var(--teal);
       margin-bottom: 16px;
-      line-height: 1.4;
     }
 
-    .resource-btn {
-      display: inline-block;
+    .vocab-category p {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 24px;
+    }
+
+    .vocab-list {
+      text-align: left;
+      background: var(--bg-soft);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .vocab-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,154,162,0.2);
+    }
+
+    .vocab-item:last-child {
+      border-bottom: none;
+    }
+
+    .korean-word {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .english-word {
+      color: #777;
+      font-size: 0.95rem;
+    }
+
+    .vocab-btn {
       background: var(--primary-pink);
       color: white;
       padding: 8px 16px;
@@ -278,13 +253,146 @@
       font-weight: 600;
       font-size: 0.9rem;
       transition: all 0.3s;
+      display: inline-block;
+      margin-top: 20px;
     }
 
-    .resource-btn:hover {
+    .vocab-btn:hover {
       background: var(--primary-red);
       transform: scale(1.05);
     }
 
+    /* Practice Section */
+    .practice-section {
+      padding: 100px 6%;
+      background: linear-gradient(to right, var(--soft-blue), var(--lavender));
+      text-align: center;
+    }
+
+    .practice-section h2 {
+      font-size: 3rem;
+      color: var(--teal);
+      margin-bottom: 20px;
+    }
+
+    .practice-section .subtitle {
+      font-size: 1.4rem;
+      color: #555;
+      margin-bottom: 60px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .practice-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .practice-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    }
+
+    .practice-icon {
+      font-size: 2.5rem;
+      color: var(--primary-pink);
+      margin-bottom: 20px;
+    }
+
+    .practice-card h3 {
+      font-size: 1.4rem;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .practice-card p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    /* Resources Section */
+    .resources-section {
+      padding: 100px 6%;
+      text-align: center;
+    }
+
+    .resources-section h2 {
+      font-size: 2.8rem;
+      color: var(--primary-pink);
+      margin-bottom: 50px;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .resource-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    }
+
+    .resource-header {
+      background: linear-gradient(135deg, var(--mint), var(--teal));
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .resource-header h3 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .resource-content {
+      padding: 30px;
+    }
+
+    .resource-content p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .resource-link {
+      display: inline-block;
+      background: var(--primary-pink);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .resource-link:hover {
+      background: var(--primary-red);
+      transform: scale(1.05);
+    }
+
+    /* Footer */
     footer {
       padding: 80px 6% 60px;
       background: linear-gradient(to top, #f0fff5, transparent);
@@ -293,25 +401,59 @@
       font-size: 1.15rem;
     }
 
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-pink);
+      transform: scale(1.1);
+    }
+
+    /* Responsive Design */
     @media (max-width: 900px) {
-      h1 { font-size: 3.8rem; }
-      .subtitle { font-size: 1.5rem; }
+      .hero h1 { font-size: 3.2rem; }
+      .hero .subtitle { font-size: 1.3rem; }
+      .vocab-section h2 { font-size: 2.5rem; }
       .nav-links { gap: 24px; font-size: 0.98rem; }
+      .vocab-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 600px) {
       nav { flex-direction: column; gap: 16px; padding: 20px 5%; }
       .nav-links { flex-direction: column; gap: 16px; }
-      h1 { font-size: 3rem; }
+      .hero { padding: 120px 6% 100px; }
+      .hero h1 { font-size: 2.8rem; }
+      .hero .korean-text { font-size: 2rem; }
+      .vocab-section { padding: 60px 6%; }
+      .practice-section { padding: 60px 6%; }
+      .resources-section { padding: 60px 6%; }
+      .footer-links { flex-direction: column; gap: 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation (copy-paste reusable block) -->
+  <!-- Navigation -->
   <nav>
     <a href="index.html" class="logo">Korean<span>Connect</span></a>
-    
+
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="vocab.html" class="active">Vocabulary</a></li>
@@ -321,96 +463,261 @@
     </ul>
   </nav>
 
-  <!-- Page Header -->
+  <!-- Hero Section -->
   <header class="hero">
-    <h1>Vocabulary Building</h1>
-    <p class="subtitle">Build your Korean word power the cute & joyful way ♡<br>Interactive flashcards, daily challenges, custom K-pop / K-drama lists, real-life examples, and fun quizzes to make every word unforgettable.</p>
+    <h1>Korean Vocabulary Builder</h1>
+    <p class="subtitle">Master essential Korean words and phrases with our comprehensive vocabulary collection. From basic greetings to advanced expressions!</p>
+    <div class="korean-text">단어 학습 • 어휘 구축</div>
   </header>
 
-  <!-- Main Vocabulary Features -->
-  <section>
-    <h2>Tools to Make Words Stick Forever</h2>
-    <div class="features-grid">
+  <!-- Vocabulary Categories -->
+  <section class="vocab-section">
+    <h2>Explore Vocabulary by Category</h2>
+    <div class="vocab-grid">
 
-      <div class="feature-card">
-        <div class="icon-big"><i class="fas fa-book-open-heart"></i></div>
-        <h3>Interactive Flashcards</h3>
-        <p>Adorable pastel cards with pronunciation audio, example sentences and smart spaced repetition — flip, learn, love!</p>
-        <img src="https://i.etsystatic.com/37117617/r/il/8a0ee9/6975799901/il_fullxfull.6975799901_h72k.jpg" 
-             alt="Cute pastel Korean vocabulary flashcards" class="screenshot">
+      <div class="vocab-category">
+        <div class="category-icon">👋</div>
+        <h3>Greetings & Basics</h3>
+        <p>Essential words for everyday conversations and polite interactions.</p>
+        <div class="vocab-list">
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">안녕하세요</div>
+              <div class="english-word">Hello (formal)</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">감사합니다</div>
+              <div class="english-word">Thank you</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">실례합니다</div>
+              <div class="english-word">Excuse me</div>
+            </div>
+          </div>
+        </div>
+        <a href="#practice" class="vocab-btn">Practice Now</a>
       </div>
 
-      <div class="feature-card">
-        <div class="icon-big"><i class="fas fa-calendar-check"></i></div>
-        <h3>Daily / Weekly Challenges</h3>
-        <p>Fun streak missions: learn 10–30 new words per day with cute themes (K-pop idols, drama quotes, travel phrases) — earn hearts & rewards!</p>
-        <img src="https://cdn.dribbble.com/userupload/26359867/file/original-5aa6ad5e80b367e2dc91ac176d2f2ec0.png?resize=400x0" 
-             alt="Pastel kawaii daily challenge interface" class="screenshot">
+      <div class="vocab-category">
+        <div class="category-icon">🍽️</div>
+        <h3>Food & Dining</h3>
+        <p>Words for restaurants, cooking, and Korean cuisine.</p>
+        <div class="vocab-list">
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">밥</div>
+              <div class="english-word">Rice</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">김치</div>
+              <div class="english-word">Kimchi</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">맛있어요</div>
+              <div class="english-word">It's delicious</div>
+            </div>
+          </div>
+        </div>
+        <a href="#practice" class="vocab-btn">Practice Now</a>
       </div>
 
-      <div class="feature-card">
-        <div class="icon-big"><i class="fas fa-list-ul"></i></div>
-        <h3>Custom Word Lists</h3>
-        <p>Create your own magical collections: favorite song lyrics, drama lines, beauty terms, food vocab — learning feels personal and exciting ♡</p>
-        <img src="https://cdn.dribbble.com/userupload/26370560/file/original-9c83d20c33e598f067fe39d412944ce4.png?resize=400x0" 
-             alt="Pastel mint custom word list UI" class="screenshot">
+      <div class="vocab-category">
+        <div class="category-icon">🏠</div>
+        <h3>Home & Family</h3>
+        <p>Vocabulary for home life, family members, and household items.</p>
+        <div class="vocab-list">
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">집</div>
+              <div class="english-word">House/Home</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">가족</div>
+              <div class="english-word">Family</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">부모님</div>
+              <div class="english-word">Parents</div>
+            </div>
+          </div>
+        </div>
+        <a href="#practice" class="vocab-btn">Practice Now</a>
       </div>
 
-      <div class="feature-card">
-        <div class="icon-big"><i class="fas fa-quote-left"></i></div>
-        <h3>Contextual Usage & Examples</h3>
-        <p>See every word in real Korean sentences, short dialogues or K-content clips — understand how natives actually use them.</p>
-        <img src="https://i.etsystatic.com/19702373/r/il/5a0ff9/6125510220/il_fullxfull.6125510220_nqgg.jpg" 
-             alt="Kawaii Hangul sentence example notebook style" class="screenshot">
+      <div class="vocab-category">
+        <div class="category-icon">🎓</div>
+        <h3>Education & Work</h3>
+        <p>Professional and academic vocabulary for school and career.</p>
+        <div class="vocab-list">
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">학교</div>
+              <div class="english-word">School</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">학생</div>
+              <div class="english-word">Student</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">회사</div>
+              <div class="english-word">Company</div>
+            </div>
+          </div>
+        </div>
+        <a href="#practice" class="vocab-btn">Practice Now</a>
       </div>
 
-      <div class="feature-card">
-        <div class="icon-big"><i class="fas fa-check-double"></i></div>
-        <h3>Quizzes & Progress Tracking</h3>
-        <p>Quick matching, typing, multiple-choice or listening quizzes — adorable progress hearts, badges and mastery stats to keep you motivated!</p>
-        <img src="https://thumbs.dreamstime.com/b/delightful-set-cute-app-icons-ui-elements-kawaii-style-includes-social-media-icons-upload-search-heart-star-volume-421624776.jpg" 
-             alt="Kawaii gamified quiz icons and elements" class="screenshot">
+      <div class="vocab-category">
+        <div class="category-icon">🛍️</div>
+        <h3>Shopping & Travel</h3>
+        <p>Words for shopping, transportation, and travel experiences.</p>
+        <div class="vocab-list">
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">시장</div>
+              <div class="english-word">Market</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">비행기</div>
+              <div class="english-word">Airplane</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">여행</div>
+              <div class="english-word">Travel</div>
+            </div>
+          </div>
+        </div>
+        <a href="#practice" class="vocab-btn">Practice Now</a>
+      </div>
+
+      <div class="vocab-category">
+        <div class="category-icon">💝</div>
+        <h3>Emotions & Feelings</h3>
+        <p>Express your feelings and understand others' emotions in Korean.</p>
+        <div class="vocab-list">
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">행복</div>
+              <div class="english-word">Happiness</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">사랑</div>
+              <div class="english-word">Love</div>
+            </div>
+          </div>
+          <div class="vocab-item">
+            <div>
+              <div class="korean-word">슬픔</div>
+              <div class="english-word">Sadness</div>
+            </div>
+          </div>
+        </div>
+        <a href="#practice" class="vocab-btn">Practice Now</a>
       </div>
 
     </div>
   </section>
 
-  <!-- Featured Resources -->
-  <section>
-    <h2>Recommended Learning Resources</h2>
-    <div class="resource-grid">
+  <!-- Practice Section -->
+  <section id="practice" class="practice-section">
+    <h2>Practice Your Korean Vocabulary</h2>
+    <p class="subtitle">Interactive exercises and quizzes to help you master Korean words and build confidence in using them.</p>
+
+    <div class="practice-grid">
+      <div class="practice-card">
+        <div class="practice-icon">🎯</div>
+        <h3>Flashcard Practice</h3>
+        <p>Review vocabulary with interactive flashcards featuring audio pronunciation and example sentences.</p>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-icon">📝</div>
+        <h3>Writing Exercises</h3>
+        <p>Practice writing Korean characters and words with guided exercises and instant feedback.</p>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-icon">🎧</div>
+        <h3>Listening Practice</h3>
+        <p>Improve listening skills with audio exercises and native speaker pronunciation examples.</p>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-icon">🗣️</div>
+        <h3>Speaking Drills</h3>
+        <p>Build speaking confidence with pronunciation guides and conversation practice scenarios.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section class="resources-section">
+    <h2>Additional Learning Resources</h2>
+    <div class="resources-grid">
 
       <div class="resource-card">
-        <div class="resource-container">
-          <img src="https://howtostudykorean.com/wp-content/uploads/2020/08/htsk-logo.png" alt="HowToStudyKorean" class="resource-thumbnail" onclick="window.open('https://www.howtostudykorean.com/', '_blank')">
-          <div class="resource-overlay">
-            <h3>HowToStudyKorean</h3>
-            <p>Comprehensive free Korean learning resources with detailed grammar lessons, vocabulary lists, and study guides.</p>
-            <a href="https://www.howtostudykorean.com/" target="_blank" class="resource-btn">Visit Website</a>
-          </div>
+        <div class="resource-header">
+          <h3>📚 Official Korean Resources</h3>
+        </div>
+        <div class="resource-content">
+          <p>Access official Korean language learning materials from the Korean government, including textbooks and study guides.</p>
+          <a href="https://www.korean.go.kr/attachFile/edu/forein03.pdf" target="_blank" class="resource-link">Download PDF</a>
+        </div>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-header">
+          <h3>🌐 HowToStudyKorean</h3>
+        </div>
+        <div class="resource-content">
+          <p>Comprehensive free Korean learning resources with detailed grammar lessons, vocabulary lists, and study guides.</p>
+          <a href="https://www.howtostudykorean.com/" target="_blank" class="resource-link">Visit Website</a>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Footer CTA -->
+  <!-- Footer -->
   <footer>
-    <p style="font-size:1.4rem; margin-bottom:24px;">
-      Ready to collect the cutest Korean vocabulary? ♡<br>
-      Download now & unlock all premium word packs + daily challenges!
-    </p>
-    
-    <div style="margin-bottom:48px;">
-      <a href="https://www.korean.go.kr/attachFile/edu/forein03.pdf" target="_blank" style="display:inline-flex; align-items:center; gap:12px; background:var(--light); color:var(--primary-red); padding:16px 40px; border-radius:999px; font-size:1.3rem; font-weight:700; text-decoration:none; box-shadow:0 10px 30px var(--glow); transition:all 0.3s;">
-        <i class="fas fa-file-pdf"></i> Download Korean Resources
-      </a>
-      <a href="#" style="display:inline-flex; align-items:center; gap:12px; background:var(--light); color:var(--primary-red); padding:16px 40px; border-radius:999px; font-size:1.3rem; font-weight:700; text-decoration:none; box-shadow:0 10px 30px var(--glow); transition:all 0.3s; margin-left:20px;">
-        <i class="fab fa-google-play"></i> Get Started Free
-      </a>
-    </div>
+    <div class="footer-content">
+      <p style="font-size:1.4rem; margin-bottom:24px;">
+        Start building your Korean vocabulary today! 💕<br>
+        화이팅! Keep learning with Korean Connect
+      </p>
 
-    <p>화이팅! Fill your heart with beautiful Korean words 💕<br>Korean Connect © 2026 • Made with ♡ in Hong Kong</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="vocab.html">Vocabulary</a>
+        <a href="resources.html">Resources</a>
+        <a href="about.html">About</a>
+        <a href="video.html">Videos</a>
+      </div>
+
+      <p>Korean Connect © 2026 • Made with ♡ for language learners</p>
+    </div>
   </footer>
 
 </body>
