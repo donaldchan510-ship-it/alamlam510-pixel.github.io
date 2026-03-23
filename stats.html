@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Korean Connect ♡ Statistical Data</title>
+
+  <!-- Google Fonts - supports Korean & Traditional Chinese -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-soft:      #fffaf5;
+      --primary-pink:  #ff9aa2;
+      --primary-red:   #ff6b6b;
+      --mint:          #a8e6cf;
+      --teal:          #2a9d8f;
+      --light:         #ffffff;
+      --text-dark:     #2d3436;
+      --glow:          rgba(255, 154, 162, 0.25);
+      --glow-mint:     rgba(168, 230, 207, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', 'Noto Sans KR', system-ui, sans-serif;
+      background: linear-gradient(135deg, var(--bg-soft) 0%, #f0fff5 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,154,162,0.18);
+      z-index: 1000;
+      padding: 16px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-pink);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-pink);
+      transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    main {
+      margin-top: 120px;
+      padding: 0 5%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stats-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .stats-header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--primary-pink);
+      margin-bottom: 20px;
+    }
+
+    .stats-header p {
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.8;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .stat-card {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,154,162,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .stat-card h3 {
+      font-size: 1.8rem;
+      color: var(--teal);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stat-card .number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary-pink);
+      margin-bottom: 10px;
+    }
+
+    .stat-card p {
+      color: var(--text-dark);
+      opacity: 0.8;
+    }
+
+    .charts-section {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 60px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    .charts-section h2 {
+      font-size: 2.5rem;
+      color: var(--primary-pink);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .chart-placeholder {
+      background: linear-gradient(135deg, var(--mint) 0%, var(--teal) 100%);
+      border-radius: 15px;
+      padding: 60px 30px;
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .chart-placeholder h4 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .chart-placeholder p {
+      opacity: 0.9;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .stats-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .nav-links {
+        gap: 24px;
+        font-size: 0.98rem;
+      }
+
+      main {
+        padding: 0 3%;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .stats-header h1 {
+        font-size: 2rem;
+      }
+
+      .stat-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">Korean<span>Connect</span></a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="vocab.html">Vocabulary</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="video.html">Videos</a></li>
+      <li><a href="stats.html" class="active">Statistical Data</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <section class="stats-header">
+      <h1>Statistical Data</h1>
+      <p>Explore comprehensive statistics and insights about Korean language learning trends, user engagement, and educational outcomes.</p>
+    </section>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <h3><i class="fas fa-users"></i> Total Learners</h3>
+        <div class="number">2.5M+</div>
+        <p>Active Korean language learners worldwide using our platform</p>
+      </div>
+
+      <div class="stat-card">
+        <h3><i class="fas fa-book"></i> Words Learned</h3>
+        <div class="number">15K+</div>
+        <p>Average vocabulary words mastered per user</p>
+      </div>
+
+      <div class="stat-card">
+        <h3><i class="fas fa-clock"></i> Study Time</h3>
+        <div class="number">500H+</div>
+        <p>Cumulative study hours across all users</p>
+      </div>
+
+      <div class="stat-card">
+        <h3><i class="fas fa-trophy"></i> Completion Rate</h3>
+        <div class="number">87%</div>
+        <p>Users who complete their learning goals</p>
+      </div>
+
+      <div class="stat-card">
+        <h3><i class="fas fa-globe"></i> Countries</h3>
+        <div class="number">120+</div>
+        <p>Countries represented in our learning community</p>
+      </div>
+
+      <div class="stat-card">
+        <h3><i class="fas fa-star"></i> Satisfaction</h3>
+        <div class="number">4.8/5</div>
+        <p>Average user satisfaction rating</p>
+      </div>
+    </section>
+
+    <section class="charts-section">
+      <h2>Data Visualizations</h2>
+
+      <div class="chart-placeholder">
+        <h4><i class="fas fa-chart-line"></i> Learning Progress Trends</h4>
+        <p>Interactive chart showing user learning progress over time</p>
+      </div>
+
+      <div class="chart-placeholder">
+        <h4><i class="fas fa-chart-pie"></i> Demographic Distribution</h4>
+        <p>Breakdown of learners by age group, region, and proficiency level</p>
+      </div>
+
+      <div class="chart-placeholder">
+        <h4><i class="fas fa-chart-bar"></i> Popular Content</h4>
+        <p>Most accessed vocabulary categories and video content</p>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
