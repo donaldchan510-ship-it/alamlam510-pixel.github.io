@@ -185,58 +185,6 @@
       margin-bottom: 10px;
     }
 
-    .pie-chart-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-    }
-
-    .pie-chart {
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: conic-gradient(
-        #3b82f6 0deg 162deg,
-        #ef4444 162deg 252deg,
-        #f59e0b 252deg 306deg,
-        #10b981 306deg 342deg,
-        #8b5cf6 342deg 360deg
-      );
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      border: 7px solid #fff;
-    }
-
-    .pie-legend {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 1.05rem;
-      color: var(--text-dark);
-      text-align: left;
-    }
-
-    .pie-legend li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .pie-legend span {
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
-      display: inline-block;
-    }
-
-    .slice-kpop { background: #3b82f6; }
-    .slice-kdrama { background: #ef4444; }
-    .slice-topik { background: #f59e0b; }
-    .slice-travel { background: #10b981; }
-    .slice-other { background: #8b5cf6; }
-
     .chart-placeholder p {
       opacity: 0.9;
     }
@@ -355,24 +303,6 @@
         <h4><i class="fas fa-chart-bar"></i> Popular Content</h4>
         <p>Most accessed vocabulary categories and video content</p>
       </div>
-    </section>
-
-    <section class="charts-section">
-      <h2>韓語學習興趣主要驅動因素</h2>
-
-      <div class="pie-chart-container">
-        <div class="pie-chart" aria-label="韓語學習興趣主要驅動因素餅狀圖"></div>
-
-        <ul class="pie-legend">
-          <li><span class="slice-kpop"></span> K-pop / 韓流流行文化 – 45.0%</li>
-          <li><span class="slice-kdrama"></span> K-drama / 韓劇 – 25.0%</li>
-          <li><span class="slice-topik"></span> TOPIK / 考試準備 – 15.0%</li>
-          <li><span class="slice-travel"></span> 旅行 / 生活文化 – 10.0%</li>
-          <li><span class="slice-other"></span> 其他 (工作、留學等) – 5.0%</li>
-        </ul>
-      </div>
-
-      <p style="text-align:center; margin-top:20px; color: rgba(0,0,0,0.75);">資料來源：用戶意向調查、韓語學習動機統計。</p>
     </section>
   </main>
 
