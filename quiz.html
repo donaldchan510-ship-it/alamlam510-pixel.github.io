@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Korean Quiz ♡</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-soft: #fffaf5;
+      --primary-pink: #ff9aa2;
+      --primary-red: #ff6b6b;
+      --mint: #a8e6cf;
+      --teal: #2a9d8f;
+      --light: #ffffff;
+      --text-dark: #2d3436;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans KR', system-ui, sans-serif;
+      background: linear-gradient(135deg, var(--bg-soft) 0%, #f0fff5 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .quiz-container {
+      background: var(--light);
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(255, 154, 162, 0.2);
+      width: 100%;
+      max-width: 520px;
+      padding: 32px;
+    }
+
+    .progress-container {
+      margin-bottom: 24px;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #636e72;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-pink), var(--primary-red));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .timer {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary-red);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .timer.warning { color: #e17055; animation: pulse 0.5s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .question {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      color: var(--text-dark);
+    }
+
+    .question-hint {
+      font-size: 16px;
+      color: #b2bec3;
+      margin-top: 8px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .option {
+      padding: 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 16px;
+      font-size: 18px;
+      background: var(--light);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .option:hover {
+      border-color: var(--primary-pink);
+      background: #fff5f5;
+      transform: translateY(-2px);
+    }
+
+    .option.correct {
+      border-color: var(--mint);
+      background: #e8f8f0;
+      color: var(--teal);
+    }
+
+    .option.wrong {
+      border-color: var(--primary-red);
+      background: #ffeaea;
+      color: var(--primary-red);
+    }
+
+    .option.disabled {
+      pointer-events: none;
+    }
+
+    .feedback {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+
+    .feedback.show { display: block; }
+    .feedback.correct { background: #e8f8f0; color: var(--teal); }
+    .feedback.wrong { background: #ffeaea; color: var(--primary-red); }
+
+    .btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-pink), var(--primary-red));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    .result {
+      text-align: center;
+    }
+
+    .result-score {
+      font-size: 64px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-pink), var(--primary-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .result-message {
+      font-size: 20px;
+      color: #636e72;
+      margin: 16px 0 24px;
+    }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="quiz-container" id="quiz">
+    <div class="progress-container">
+      <div class="progress-text">
+        <span id="questionNum">Question 1/10</span>
+        <span id="scoreDisplay">Score: 0</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="timer">
+      <i class="far fa-clock"></i>
+      <span id="timer">15</span>
+    </div>
+
+    <div class="question" id="question">
+      What is the Korean for <span id="targetWord" style="color: var(--primary-red);">red</span>?
+      <div class="question-hint" id="questionHint">Select the correct answer</div>
+    </div>
+
+    <div class="options" id="options"></div>
+
+    <div class="feedback" id="feedback"></div>
+    <button class="btn btn-primary" id="nextBtn" style="display:none">Next Question</button>
+  </div>
+
+  <div class="quiz-container hidden" id="result">
+    <div class="result">
+      <div class="result-score" id="finalScore">8/10</div>
+      <div class="result-message" id="resultMessage">Great job! 🌟</div>
+      <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      { type: 'color', target: 'red', answer: '빨강', options: ['파랑', '노랑', '빨강', '초록'] },
+      { type: 'color', target: 'blue', answer: '파랑', options: ['빨강', '파랑', '보라', '주황'] },
+      { type: 'color', target: 'yellow', answer: '노랑', options: ['노랑', '검정', '하양', '분홍'] },
+      { type: 'color', target: 'green', answer: '초록', options: ['초록', '파랑', '빨강', '주황'] },
+      { type: 'color', target: 'white', answer: '하양', options: ['검정', '회색', '하양', '파랑'] },
+      { type: 'color', target: 'black', answer: '검정', options: ['검정', '빨강', '노랑', '초록'] },
+      { type: 'color', target: 'purple', answer: '보라', options: ['분홍', '주황', '보라', '파랑'] },
+      { type: 'color', target: 'orange', answer: '주황', options: ['노랑', '주황', '빨강', '보라'] },
+      { type: 'number', target: 'one', answer: '하나', options: ['둘', '셋', '하나', '넷'] },
+      { type: 'number', target: 'two', answer: '둘', options: ['하나', '둘', '셋', '넷'] },
+      { type: 'number', target: 'three', answer: '셋', options: ['둘', '셋', '하나', '다섯'] },
+      { type: 'number', target: 'four', answer: '넷', options: ['다섯', '넷', '셋', '둘'] },
+      { type: 'number', target: 'five', answer: '다섯', options: ['넷', '여섯', '다섯', '셋'] },
+      { type: 'number', target: 'six', answer: '여섯', options: ['일곱', '여섯', '다섯', '넷'] },
+      { type: 'number', target: 'seven', answer: '일곱', options: ['여섯', '일곱', '여덟', '아홉'] },
+      { type: 'number', target: 'eight', answer: '여덟', options: ['여덟', '아홉', '열', '일곱'] },
+      { type: 'number', target: 'nine', answer: '아홉', options: ['여덟', '아홉', '열', '여섯'] },
+      { type: 'number', target: 'ten', answer: '열', options: ['아홉', '열', '스물', '여덟'] },
+    ];
+
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let timer;
+    let timeLeft = 15;
+    let answered = false;
+
+    function shuffle(arr) {
+      return arr.sort(() => Math.random() - 0.5);
+    }
+
+    function initQuiz() {
+      currentQuestions = shuffle([...questions]).slice(0, 10);
+      currentIndex = 0;
+      score = 0;
+      showQuestion();
+    }
+
+    function showQuestion() {
+      answered = false;
+      timeLeft = 15;
+      const q = currentQuestions[currentIndex];
+      
+      document.getElementById('questionNum').textContent = `Question ${currentIndex + 1}/10`;
+      document.getElementById('scoreDisplay').textContent = `Score: ${score}`;
+      document.getElementById('progressFill').style.width = `${(currentIndex / 10) * 100}%`;
+      document.getElementById('targetWord').textContent = q.type === 'color' ? q.target : q.target.replace('one','1').replace('two','2').replace('three','3').replace('four','4').replace('five','5').replace('six','6').replace('seven','7').replace('eight','8').replace('nine','9').replace('ten','10');
+      
+      const optionsContainer = document.getElementById('options');
+      optionsContainer.innerHTML = '';
+      
+      shuffle(q.options).forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option';
+        btn.textContent = opt;
+        btn.onclick = () => selectAnswer(opt, q.answer);
+        optionsContainer.appendChild(btn);
+      });
+
+      document.getElementById('feedback').className = 'feedback';
+      document.getElementById('nextBtn').style.display = 'none';
+      startTimer();
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      const timerEl = document.getElementById('timer');
+      timerEl.classList.remove('warning');
+      
+      timer = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = timeLeft;
+        if (timeLeft <= 5) timerEl.classList.add('warning');
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          timeOut();
+        }
+      }, 1000);
+    }
+
+    function selectAnswer(selected, correct) {
+      if (answered) return;
+      answered = true;
+      clearInterval(timer);
+
+      const options = document.querySelectorAll('.option');
+      options.forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.textContent === correct) opt.classList.add('correct');
+        if (opt.textContent === selected && selected !== correct) opt.classList.add('wrong');
+      });
+
+      const feedback = document.getElementById('feedback');
+      if (selected === correct) {
+        score++;
+        feedback.textContent = '✓ Correct! Well done!';
+        feedback.className = 'feedback show correct';
+      } else {
+        feedback.textContent = `✗ The answer is: ${correct}`;
+        feedback.className = 'feedback show wrong';
+      }
+
+      document.getElementById('scoreDisplay').textContent = `Score: ${score}`;
+      document.getElementById('nextBtn').style.display = 'block';
+    }
+
+    function timeOut() {
+      answered = true;
+      const q = currentQuestions[currentIndex];
+      
+      const options = document.querySelectorAll('.option');
+      options.forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.textContent === q.answer) opt.classList.add('correct');
+      });
+
+      const feedback = document.getElementById('feedback');
+      feedback.textContent = `⏰ Time's up! Answer: ${q.answer}`;
+      feedback.className = 'feedback show wrong';
+      document.getElementById('nextBtn').style.display = 'block';
+    }
+
+    document.getElementById('nextBtn').onclick = () => {
+      currentIndex++;
+      if (currentIndex < 10) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    };
+
+    function showResult() {
+      document.getElementById('quiz').classList.add('hidden');
+      document.getElementById('result').classList.remove('hidden');
+      document.getElementById('finalScore').textContent = `${score}/10`;
+      
+      let msg = '';
+      if (score >= 8) msg = 'Amazing! You\'re a star! ★';
+      else if (score >= 5) msg = 'Good job! Keep practicing! ✨';
+      else msg = 'Nice try! Practice makes perfect! 💪';
+      document.getElementById('resultMessage').textContent = msg;
+    }
+
+    function restartQuiz() {
+      document.getElementById('result').classList.add('hidden');
+      document.getElementById('quiz').classList.remove('hidden');
+      initQuiz();
+    }
+
+    initQuiz();
+  </script>
+</body>
+</html>

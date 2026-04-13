@@ -11,6 +11,9 @@
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <!-- Chart.js for data visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
     :root {
       --bg-soft:      #fffaf5;
@@ -189,6 +192,25 @@
       opacity: 0.9;
     }
 
+    .chart-container {
+      background: linear-gradient(135deg, var(--mint) 0%, var(--teal) 100%);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .chart-container h4 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .chart-container canvas {
+      max-width: 100%;
+      height: auto !important;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .stats-header h1 {
@@ -294,9 +316,9 @@
         <p>Interactive chart showing user learning progress over time</p>
       </div>
 
-      <div class="chart-placeholder">
+      <div class="chart-container">
         <h4><i class="fas fa-chart-pie"></i> Demographic Distribution</h4>
-        <p>Breakdown of learners by age group, region, and proficiency level</p>
+        <canvas id="demographicChart" width="400" height="300"></canvas>
       </div>
 
       <div class="chart-placeholder">
@@ -305,6 +327,56 @@
       </div>
     </section>
   </main>
+
+  <script>
+    // Demographic Distribution Pie Chart
+    const ctx = document.getElementById('demographicChart').getContext('2d');
+    const demographicChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['18-24 years', '25-34 years', '35-44 years', '45+ years'],
+        datasets: [{
+          data: [35, 40, 15, 10],
+          backgroundColor: [
+            'rgba(255, 154, 162, 0.8)',
+            'rgba(255, 107, 107, 0.8)',
+            'rgba(168, 230, 207, 0.8)',
+            'rgba(42, 157, 143, 0.8)'
+          ],
+          borderColor: [
+            'rgba(255, 154, 162, 1)',
+            'rgba(255, 107, 107, 1)',
+            'rgba(168, 230, 207, 1)',
+            'rgba(42, 157, 143, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: 'white',
+              font: {
+                size: 14
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.parsed;
+                return label + ': ' + value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>
