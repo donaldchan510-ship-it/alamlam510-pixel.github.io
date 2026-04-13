@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Korean Connect ♡ Fill in the Blank</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-soft:      #fffaf5;
+      --primary-pink:  #ff9aa2;
+      --primary-red:   #ff6b6b;
+      --mint:          #a8e6cf;
+      --teal:          #2a9d8f;
+      --light:         #ffffff;
+      --text-dark:     #2d3436;
+      --glow:          rgba(255, 154, 162, 0.25);
+      --glow-mint:     rgba(168, 230, 207, 0.3);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Noto Sans KR', system-ui, sans-serif;
+      background: linear-gradient(135deg, var(--bg-soft) 0%, #f0fff5 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,154,162,0.18);
+      z-index: 1000;
+      padding: 16px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-pink);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-pink);
+      transform: translateY(-2px);
+    }
+
+    .main-content {
+      padding: 140px 6% 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      color: var(--primary-red);
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      color: #636e72;
+    }
+
+    .exercise-container {
+      background: var(--light);
+      border-radius: 24px;
+      box-shadow: 0 10px 40px var(--glow);
+      padding: 40px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1rem;
+      color: #636e72;
+      margin-bottom: 20px;
+    }
+
+    .progress-info span { font-weight: 600; }
+
+    .progress-bar {
+      height: 10px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-pink), var(--primary-red));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .hint-box {
+      background: linear-gradient(135deg, var(--glow) 0%, var(--glow-mint) 100%);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 1rem;
+      color: var(--primary-pink);
+      font-weight: 500;
+    }
+
+    .sentence {
+      font-size: 1.4rem;
+      line-height: 2.2;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .blank {
+      display: inline-block;
+      min-width: 100px;
+      border-bottom: 3px dashed var(--primary-pink);
+      text-align: center;
+      padding: 4px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .blank:hover {
+      background: rgba(255, 154, 162, 0.15);
+      border-bottom-style: solid;
+    }
+
+    .blank.filled.correct {
+      border-color: var(--mint);
+      background: #e8f8f0;
+      color: var(--teal);
+    }
+
+    .blank.filled.wrong {
+      border-color: var(--primary-red);
+      background: #ffeaea;
+      color: var(--primary-red);
+    }
+
+    .input-area {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 16px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .input-area input:focus {
+      outline: none;
+      border-color: var(--primary-pink);
+    }
+
+    .input-area input.correct {
+      border-color: var(--mint);
+      background: #e8f8f0;
+    }
+
+    .input-area input.wrong {
+      border-color: var(--primary-red);
+      background: #ffeaea;
+    }
+
+    .btn {
+      padding: 16px 32px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-pink), var(--primary-red));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .result {
+      text-align: center;
+    }
+
+    .result-score {
+      font-size: 4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-pink), var(--primary-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .result-message {
+      font-size: 1.3rem;
+      color: #636e72;
+      margin: 16px 0 32px;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 600px) {
+      .input-area { flex-direction: column; }
+      .page-header h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">Korean<span>Connect</span> ♡</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="vocab.html">Vocab</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-content">
+    <div class="page-header">
+      <h1>Fill in the Blank</h1>
+      <p>Complete the Korean sentences with the correct word</p>
+    </div>
+
+    <div class="exercise-container" id="exercise">
+      <div class="progress-info">
+        <span id="progressText">Sentence 1 of 10</span>
+        <span id="scoreText">Score: 0</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="hint-box">
+        <i class="fas fa-lightbulb"></i> Hint: <span id="hintText">Hover over the blank</span>
+      </div>
+      <div class="sentence" id="sentence"></div>
+      <div class="input-area">
+        <input type="text" id="answerInput" placeholder="Type your answer..." />
+        <button class="btn btn-primary" id="submitBtn">Check</button>
+      </div>
+    </div>
+
+    <div class="exercise-container hidden" id="result">
+      <div class="result">
+        <div class="result-score" id="finalScore">8/10</div>
+        <div class="result-message" id="resultMessage">Great job!</div>
+        <button class="btn btn-primary" onclick="restart()">Try Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sentences = [
+      { korean: "사과가 ___ (red) 이에요.", answer: "빨간", hint: "Color word" },
+      { korean: "나는 ___ (one) 사과가 있어요.", answer: "하나의", hint: "Number + particle" },
+      { korean: "하늘이 ___ (blue) 않아요.", answer: "파란", hint: "Color word" },
+      { korean: "책이 ___ (three) 권 있어요.", answer: "세", hint: "Counter word" },
+      { korean: "꽃이 ___ (white) 예아요.", answer: "하얀", hint: "Color word" },
+      { korean: "고양이가 ___ (four) 마리예요.", answer: "네", hint: "Number + classifier" },
+      { korean: "바지가 ___ (black)니다.", answer: "검정", hint: "Color word" },
+      { korean: "형제가 ___ (two) 명 있어요.", answer: "두", hint: "Number" },
+      { korean: "나무가 ___ (green) 해요.", answer: "초록", hint: "Color word" },
+      { korean: "친구가 ___ (five) 명 왔어요.", answer: "다섯", hint: "Number" },
+    ];
+
+    let currentIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function init() {
+      currentIndex = 0;
+      score = 0;
+      showSentence();
+    }
+
+    function showSentence() {
+      answered = false;
+      const s = sentences[currentIndex];
+      
+      document.getElementById('progressText').textContent = `Sentence ${currentIndex + 1} of 10`;
+      document.getElementById('scoreText').textContent = `Score: ${score}`;
+      document.getElementById('progressFill').style.width = `${(currentIndex / 10) * 100}%`;
+      document.getElementById('hintText').textContent = s.hint;
+      
+      const parts = s.korean.split("___");
+      document.getElementById('sentence').innerHTML = 
+        `${parts[0]}<span class="blank" id="blank" title="Click to see hint">${s.answer}</span>${parts[1]}`;
+      
+      const input = document.getElementById('answerInput');
+      input.value = "";
+      input.className = "";
+      input.disabled = false;
+      document.getElementById('submitBtn').disabled = false;
+      input.focus();
+    }
+
+    document.getElementById('answerInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') checkAnswer();
+    });
+
+    document.getElementById('submitBtn').onclick = checkAnswer;
+
+    function checkAnswer() {
+      if (answered) return;
+      answered = true;
+      
+      const input = document.getElementById('answerInput');
+      const userAnswer = input.value.trim();
+      const correctAnswer = sentences[currentIndex].answer;
+      const blank = document.getElementById('blank');
+
+      input.disabled = true;
+      document.getElementById('submitBtn').disabled = true;
+
+      if (userAnswer === correctAnswer) {
+        score++;
+        input.classList.add('correct');
+        blank.classList.add('filled', 'correct');
+        input.value = `${userAnswer} ✓`;
+      } else {
+        input.classList.add('wrong');
+        blank.classList.add('filled', 'wrong');
+        input.value = `${userAnswer} ✗ (${correctAnswer})`;
+      }
+
+      document.getElementById('scoreText').textContent = `Score: ${score}`;
+
+      setTimeout(() => {
+        currentIndex++;
+        if (currentIndex < sentences.length) {
+          showSentence();
+        } else {
+          showResult();
+        }
+      }, 1500);
+    }
+
+    function showResult() {
+      document.getElementById('exercise').classList.add('hidden');
+      document.getElementById('result').classList.remove('hidden');
+      document.getElementById('finalScore').textContent = `${score}/10`;
+      
+      let msg = score >= 8 ? "Amazing! You're a star! ★" : 
+                score >= 5 ? "Good job! Keep practicing! ✨" : 
+                "Nice try! Practice makes perfect! 💪";
+      document.getElementById('resultMessage').textContent = msg;
+    }
+
+    function restart() {
+      document.getElementById('result').classList.add('hidden');
+      document.getElementById('exercise').classList.remove('hidden');
+      init();
+    }
+
+    init();
+  </script>
+</body>
+</html>

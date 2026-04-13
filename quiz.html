@@ -3,40 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Korean Quiz ♡</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <title>Korean Connect ♡ Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
-      --bg-soft: #fffaf5;
-      --primary-pink: #ff9aa2;
-      --primary-red: #ff6b6b;
-      --mint: #a8e6cf;
-      --teal: #2a9d8f;
-      --light: #ffffff;
-      --text-dark: #2d3436;
+      --bg-soft:      #fffaf5;
+      --primary-pink:  #ff9aa2;
+      --primary-red:   #ff6b6b;
+      --mint:          #a8e6cf;
+      --teal:          #2a9d8f;
+      --light:         #ffffff;
+      --text-dark:     #2d3436;
+      --glow:          rgba(255, 154, 162, 0.25);
+      --glow-mint:     rgba(168, 230, 207, 0.3);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Noto Sans KR', system-ui, sans-serif;
+      font-family: 'Noto Sans TC', 'Noto Sans KR', system-ui, sans-serif;
       background: linear-gradient(135deg, var(--bg-soft) 0%, #f0fff5 100%);
       color: var(--text-dark);
+      line-height: 1.6;
       min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,154,162,0.18);
+      z-index: 1000;
+      padding: 16px 5%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-pink);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-pink);
+      transform: translateY(-2px);
+    }
+
+    .main-content {
+      padding: 140px 6% 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      color: var(--primary-red);
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      color: #636e72;
     }
 
     .quiz-container {
       background: var(--light);
       border-radius: 24px;
-      box-shadow: 0 10px 40px rgba(255, 154, 162, 0.2);
-      width: 100%;
-      max-width: 520px;
-      padding: 32px;
+      box-shadow: 0 10px 40px var(--glow);
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .progress-container {
@@ -46,10 +112,12 @@
     .progress-text {
       display: flex;
       justify-content: space-between;
-      font-size: 14px;
+      font-size: 1rem;
       color: #636e72;
       margin-bottom: 8px;
     }
+
+    .progress-text span { font-weight: 600; }
 
     .progress-bar {
       height: 10px;
@@ -68,48 +136,60 @@
 
     .timer {
       text-align: center;
-      font-size: 28px;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--primary-red);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .timer.warning { color: #e17055; animation: pulse 0.5s infinite; }
+    .timer.warning {
+      color: #e17055;
+      animation: pulse 0.5s infinite;
+    }
 
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
     }
 
-    .question {
+    .question-card {
+      background: linear-gradient(135deg, var(--glow) 0%, var(--glow-mint) 100%);
+      border-radius: 20px;
+      padding: 32px;
       text-align: center;
-      font-size: 32px;
-      font-weight: 500;
       margin-bottom: 24px;
-      color: var(--text-dark);
     }
 
-    .question-hint {
-      font-size: 16px;
-      color: #b2bec3;
-      margin-top: 8px;
+    .question-label {
+      font-size: 1rem;
+      color: #636e72;
+      margin-bottom: 12px;
+    }
+
+    .question-text {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .question-text span {
+      color: var(--primary-red);
     }
 
     .options {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 16px;
     }
 
     .option {
-      padding: 16px;
+      padding: 20px;
       border: 2px solid #e0e0e0;
       border-radius: 16px;
-      font-size: 18px;
+      font-size: 1.1rem;
       background: var(--light);
       cursor: pointer;
       transition: all 0.2s ease;
@@ -154,10 +234,10 @@
     .btn {
       margin-top: 20px;
       width: 100%;
-      padding: 16px;
+      padding: 18px;
       border: none;
       border-radius: 16px;
-      font-size: 18px;
+      font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -178,7 +258,7 @@
     }
 
     .result-score {
-      font-size: 64px;
+      font-size: 4rem;
       font-weight: 700;
       background: linear-gradient(135deg, var(--primary-pink), var(--primary-red));
       -webkit-background-clip: text;
@@ -186,104 +266,213 @@
     }
 
     .result-message {
-      font-size: 20px;
+      font-size: 1.3rem;
       color: #636e72;
-      margin: 16px 0 24px;
+      margin: 16px 0 32px;
     }
 
     .hidden { display: none; }
+
+    @media (max-width: 600px) {
+      .options { grid-template-columns: 1fr; }
+      .page-header h1 { font-size: 2rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="quiz-container" id="quiz">
-    <div class="progress-container">
-      <div class="progress-text">
-        <span id="questionNum">Question 1/10</span>
-        <span id="scoreDisplay">Score: 0</span>
+  <nav>
+    <a href="index.html" class="logo">Korean<span>Connect</span> ♡</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="vocab.html">Vocab</a></li>
+      <li><a href="quiz.html" class="active">Quiz</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-content">
+    <div class="page-header">
+      <h1>Korean Quiz</h1>
+      <p>Test your knowledge of colors and numbers</p>
+    </div>
+
+    <div class="quiz-container" id="quiz">
+      <div class="progress-container">
+        <div class="progress-text">
+          <span id="questionNum">Question 1</span>
+          <span id="scoreDisplay">Score: 0</span>
+        </div>
       </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
+
+      <div class="timer">
+        <i class="far fa-clock"></i>
+        <span id="timer">2:00</span>
       </div>
+
+      <div class="question-card">
+        <div class="question-label">What is the Korean for</div>
+        <div class="question-text">
+          <span id="targetWord">red</span>?
+        </div>
+      </div>
+
+      <div class="options" id="options"></div>
+
+      <div class="feedback" id="feedback"></div>
+      <button class="btn btn-primary" id="nextBtn" style="display:none">Next Question</button>
     </div>
 
-    <div class="timer">
-      <i class="far fa-clock"></i>
-      <span id="timer">15</span>
-    </div>
-
-    <div class="question" id="question">
-      What is the Korean for <span id="targetWord" style="color: var(--primary-red);">red</span>?
-      <div class="question-hint" id="questionHint">Select the correct answer</div>
-    </div>
-
-    <div class="options" id="options"></div>
-
-    <div class="feedback" id="feedback"></div>
-    <button class="btn btn-primary" id="nextBtn" style="display:none">Next Question</button>
-  </div>
-
-  <div class="quiz-container hidden" id="result">
-    <div class="result">
-      <div class="result-score" id="finalScore">8/10</div>
-      <div class="result-message" id="resultMessage">Great job! 🌟</div>
-      <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+    <div class="quiz-container hidden" id="result">
+      <div class="result">
+        <div class="result-score" id="finalScore">8/10</div>
+        <div class="result-message" id="resultMessage">Great job! 🌟</div>
+        <button class="btn btn-primary" onclick="restartQuiz()">Play Again</button>
+      </div>
     </div>
   </div>
 
   <script>
     const questions = [
-      { type: 'color', target: 'red', answer: '빨강', options: ['파랑', '노랑', '빨강', '초록'] },
-      { type: 'color', target: 'blue', answer: '파랑', options: ['빨강', '파랑', '보라', '주황'] },
-      { type: 'color', target: 'yellow', answer: '노랑', options: ['노랑', '검정', '하양', '분홍'] },
-      { type: 'color', target: 'green', answer: '초록', options: ['초록', '파랑', '빨강', '주황'] },
-      { type: 'color', target: 'white', answer: '하양', options: ['검정', '회색', '하양', '파랑'] },
-      { type: 'color', target: 'black', answer: '검정', options: ['검정', '빨강', '노랑', '초록'] },
-      { type: 'color', target: 'purple', answer: '보라', options: ['분홍', '주황', '보라', '파랑'] },
-      { type: 'color', target: 'orange', answer: '주황', options: ['노랑', '주황', '빨강', '보라'] },
-      { type: 'number', target: 'one', answer: '하나', options: ['둘', '셋', '하나', '넷'] },
-      { type: 'number', target: 'two', answer: '둘', options: ['하나', '둘', '셋', '넷'] },
-      { type: 'number', target: 'three', answer: '셋', options: ['둘', '셋', '하나', '다섯'] },
-      { type: 'number', target: 'four', answer: '넷', options: ['다섯', '넷', '셋', '둘'] },
-      { type: 'number', target: 'five', answer: '다섯', options: ['넷', '여섯', '다섯', '셋'] },
-      { type: 'number', target: 'six', answer: '여섯', options: ['일곱', '여섯', '다섯', '넷'] },
-      { type: 'number', target: 'seven', answer: '일곱', options: ['여섯', '일곱', '여덟', '아홉'] },
-      { type: 'number', target: 'eight', answer: '여덟', options: ['여덟', '아홉', '열', '일곱'] },
-      { type: 'number', target: 'nine', answer: '아홉', options: ['여덟', '아홉', '열', '여섯'] },
-      { type: 'number', target: 'ten', answer: '열', options: ['아홉', '열', '스물', '여덟'] },
+      { type: 'color', target: 'red', answer: '빨강' },
+      { type: 'color', target: 'blue', answer: '파랑' },
+      { type: 'color', target: 'yellow', answer: '노랑' },
+      { type: 'color', target: 'green', answer: '초록' },
+      { type: 'color', target: 'white', answer: '하양' },
+      { type: 'color', target: 'black', answer: '검정' },
+      { type: 'color', target: 'purple', answer: '보라' },
+      { type: 'color', target: 'orange', answer: '주황' },
+      { type: 'color', target: 'pink', answer: '분홍' },
+      { type: 'color', target: 'gray', answer: '회색' },
+      { type: 'number', target: 'one', answer: '하나' },
+      { type: 'number', target: 'two', answer: '둘' },
+      { type: 'number', target: 'three', answer: '셋' },
+      { type: 'number', target: 'four', answer: '넷' },
+      { type: 'number', target: 'five', answer: '다섯' },
+      { type: 'number', target: 'six', answer: '여섯' },
+      { type: 'number', target: 'seven', answer: '일곱' },
+      { type: 'number', target: 'eight', answer: '여덟' },
+      { type: 'number', target: 'nine', answer: '아홉' },
+      { type: 'number', target: 'ten', answer: '열' },
+      { type: 'number', target: 'eleven', answer: '열하나' },
+      { type: 'number', target: 'twelve', answer: '열둘' },
+      { type: 'number', target: 'thirteen', answer: '열셋' },
+      { type: 'number', target: 'fourteen', answer: '열넷' },
+      { type: 'number', target: 'fifteen', answer: '열다섯' },
+      { type: 'number', target: 'twenty', answer: '스무' },
+      { type: 'greeting', target: 'hello', answer: '안녕하세요' },
+      { type: 'greeting', target: 'thank you', answer: '감사합니다' },
+      { type: 'greeting', target: 'goodbye', answer: '안녕히 가세요' },
+      { type: 'greeting', target: 'please', answer: '부탁합니다' },
+      { type: 'greeting', target: 'sorry', answer: '죄송합니다' },
+      { type: 'greeting', target: 'yes', answer: '네' },
+      { type: 'greeting', target: 'no', answer: '아니요' },
+      { type: 'animal', target: 'dog', answer: '개' },
+      { type: 'animal', target: 'cat', answer: '고양이' },
+      { type: 'animal', target: 'bird', answer: '새' },
+      { type: 'animal', target: 'fish', answer: '물고기' },
+      { type: 'animal', target: 'rabbit', answer: '토끼' },
+      { type: 'food', target: 'rice', answer: '밥' },
+      { type: 'food', target: 'water', answer: '물' },
+      { type: 'food', target: 'bread', answer: '빵' },
+      { type: 'food', target: 'apple', answer: '사과' },
+      { type: 'food', target: 'banana', answer: '바나나' },
     ];
+
+    const wrongOptions = {
+      '빨강': ['파랑', '노랑', '초록', '하양', '검정', '보라', '주황', '분홍', '회색'],
+      '파랑': ['빨강', '노랑', '초록', '하양', '검정', '보라', '주황', '분홍', '회색'],
+      '노랑': ['빨강', '파랑', '초록', '하양', '검정', '보라', '주황', '분홍', '회색'],
+      '초록': ['빨강', '파랑', '노랑', '하양', '검정', '보라', '주황', '분홍', '회색'],
+      '하양': ['빨강', '파랑', '노랑', '초록', '검정', '보라', '주황', '분홍', '회색'],
+      '검정': ['빨강', '파랑', '노랑', '초록', '하양', '보라', '주황', '분홍', '회색'],
+      '보라': ['빨강', '파랑', '노랑', '초록', '하양', '검정', '주황', '분홍', '회색'],
+      '주황': ['빨강', '파랑', '노랑', '초록', '하양', '검정', '보라', '분홍', '회색'],
+      '분홍': ['빨강', '파랑', '노랑', '초록', '하양', '검정', '보라', '주황', '회색'],
+      '회색': ['빨강', '파랑', '노랑', '초록', '하양', '검정', '보라', '주황', '분홍'],
+      '하나': ['둘', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '아홉', '열'],
+      '둘': ['하나', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '아홉', '열'],
+      '셋': ['하나', '둘', '넷', '다섯', '여섯', '일곱', '여덟', '아홉', '열'],
+      '넷': ['하나', '둘', '셋', '다섯', '여섯', '일곱', '여덟', '아홉', '열'],
+      '다섯': ['하나', '둘', '셋', '넷', '여섯', '일곱', '여덟', '아홉', '열'],
+      '여섯': ['하나', '둘', '셋', '넷', '다섯', '일곱', '여덟', '아홉', '열'],
+      '일곱': ['하나', '둘', '셋', '넷', '다섯', '여섯', '여덟', '아홉', '열'],
+      '여덟': ['하나', '둘', '셋', '넷', '다섯', '여섯', '일곱', '아홉', '열'],
+      '아홉': ['하나', '둘', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '열'],
+      '열': ['하나', '둘', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '아홉'],
+      '열하나': ['열', '열둘', '열셋', '스무', '하나', '둘', '셋', '넷', '다섯'],
+      '열둘': ['열', '열하나', '열셋', '열넷', '하나', '둘', '셋', '넷', '다섯'],
+      '스무': ['열', '열하나', '열둘', '서른', '하나', '둘', '셋', '넷', '다섯'],
+      '안녕하세요': ['안녕', '안녕히 가세요', '감사합니다', '제발', '다음에 봐요', 'HELLO', 'HELLO', 'HELLO', 'HELLO'],
+      '감사합니다': ['안녕하세요', '부탁합니다', '죄송합니다', '고마워요', '천만에요', 'THANK', 'THANK', 'THANK', 'THANK'],
+      '안녕히 가세요': ['안녕하세요', '안녕', '다시 봐요', '다음에 봐요', '감사합니다', 'BYE', 'BYE', 'BYE', 'BYE'],
+      '부탁합니다': ['감사합니다', '부탁해요', '제발', '도와주세요', '물어봅니다', 'PLEASE', 'PLEASE', 'PLEASE', 'PLEASE'],
+      '죄송합니다': ['미안해요', '실례합니다', '감사합니다', '알겠어요', '조심할게요', 'SORRY', 'SORRY', 'SORRY', 'SORRY'],
+      '네': ['아니요', '예', '그래요', '알겠어요', '맞아요', 'YES', 'YES', 'YES', 'YES'],
+      '아니요': ['네', '예', '아녀', '아닙니다', '틀려요', 'NO', 'NO', 'NO', 'NO'],
+      '개': ['고양이', '새', '물고기', '토끼', '곰', 'DOG', 'DOG', 'DOG', 'DOG'],
+      '고양이': ['개', '새', '물고기', '토끼', '고래', 'CAT', 'CAT', 'CAT', 'CAT'],
+      '새': ['개', '고양이', '물고기', '토끼', '나비', 'BIRD', 'BIRD', 'BIRD', 'BIRD'],
+      '물고기': ['개', '고양이', '새', '토끼', '고래', 'FISH', 'FISH', 'FISH', 'FISH'],
+      '토끼': ['개', '고양이', '새', '물고기', '고양이', 'RABBIT', 'RABBIT', 'RABBIT', 'RABBIT'],
+      '밥': ['빵', '물', '사과', '바나나', '고기', 'RICE', 'RICE', 'RICE', 'RICE'],
+      '물': ['밥', '빵', '사과', '바나나', '우유', 'WATER', 'WATER', 'WATER', 'WATER'],
+      '빵': ['밥', '물', '사과', '바나나', '케이크', 'BREAD', 'BREAD', 'BREAD', 'BREAD'],
+      '사과': ['밥', '물', '빵', '바나나', '포도', 'APPLE', 'APPLE', 'APPLE', 'APPLE'],
+      '바나나': ['밥', '물', '빵', '사과', '딸기', 'BANANA', 'BANANA', 'BANANA', 'BANANA'],
+    };
+
+    const numberMap = { one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10', eleven: '11', twelve: '12', thirteen: '13', fourteen: '14', fifteen: '15', twenty: '20' };
 
     let currentQuestions = [];
     let currentIndex = 0;
     let score = 0;
+    let totalAnswered = 0;
     let timer;
-    let timeLeft = 15;
+    let timeLeft = 120;
     let answered = false;
+    let gameEnded = false;
 
     function shuffle(arr) {
       return arr.sort(() => Math.random() - 0.5);
     }
 
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function generateOptions(correct) {
+      const wrong = wrongOptions[correct] || ['보기1', '보기2', '보기3', '보기4'];
+      const shuffledWrong = shuffle([...wrong]);
+      return shuffle([correct, ...shuffledWrong.slice(0, 3)]);
+    }
+
     function initQuiz() {
-      currentQuestions = shuffle([...questions]).slice(0, 10);
+      currentQuestions = shuffle([...questions]);
       currentIndex = 0;
       score = 0;
+      totalAnswered = 0;
+      timeLeft = 120;
+      gameEnded = false;
       showQuestion();
     }
 
     function showQuestion() {
+      if (gameEnded) return;
+      
       answered = false;
-      timeLeft = 15;
       const q = currentQuestions[currentIndex];
       
-      document.getElementById('questionNum').textContent = `Question ${currentIndex + 1}/10`;
+      document.getElementById('questionNum').textContent = `Question ${totalAnswered + 1}`;
       document.getElementById('scoreDisplay').textContent = `Score: ${score}`;
-      document.getElementById('progressFill').style.width = `${(currentIndex / 10) * 100}%`;
-      document.getElementById('targetWord').textContent = q.type === 'color' ? q.target : q.target.replace('one','1').replace('two','2').replace('three','3').replace('four','4').replace('five','5').replace('six','6').replace('seven','7').replace('eight','8').replace('nine','9').replace('ten','10');
+      document.getElementById('targetWord').textContent = q.type === 'number' ? numberMap[q.target] : q.target;
       
       const optionsContainer = document.getElementById('options');
       optionsContainer.innerHTML = '';
       
-      shuffle(q.options).forEach(opt => {
+      const options = generateOptions(q.answer);
+      options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'option';
         btn.textContent = opt;
@@ -300,22 +489,24 @@
       clearInterval(timer);
       const timerEl = document.getElementById('timer');
       timerEl.classList.remove('warning');
+      timerEl.textContent = formatTime(timeLeft);
       
       timer = setInterval(() => {
         timeLeft--;
-        timerEl.textContent = timeLeft;
-        if (timeLeft <= 5) timerEl.classList.add('warning');
+        timerEl.textContent = formatTime(timeLeft);
+        if (timeLeft <= 30) timerEl.classList.add('warning');
         if (timeLeft <= 0) {
           clearInterval(timer);
-          timeOut();
+          endGame();
         }
       }, 1000);
     }
 
     function selectAnswer(selected, correct) {
-      if (answered) return;
+      if (answered || gameEnded) return;
       answered = true;
       clearInterval(timer);
+      totalAnswered++;
 
       const options = document.querySelectorAll('.option');
       options.forEach(opt => {
@@ -340,6 +531,7 @@
 
     function timeOut() {
       answered = true;
+      totalAnswered++;
       const q = currentQuestions[currentIndex];
       
       const options = document.querySelectorAll('.option');
@@ -355,23 +547,29 @@
     }
 
     document.getElementById('nextBtn').onclick = () => {
-      currentIndex++;
-      if (currentIndex < 10) {
+      currentIndex = (currentIndex + 1) % currentQuestions.length;
+      if (!gameEnded) {
         showQuestion();
-      } else {
-        showResult();
       }
     };
+
+    function endGame() {
+      gameEnded = true;
+      clearInterval(timer);
+      showResult();
+    }
 
     function showResult() {
       document.getElementById('quiz').classList.add('hidden');
       document.getElementById('result').classList.remove('hidden');
-      document.getElementById('finalScore').textContent = `${score}/10`;
+      document.getElementById('finalScore').textContent = `${score}/${totalAnswered}`;
       
+      const percentage = totalAnswered > 0 ? Math.round((score / totalAnswered) * 100) : 0;
       let msg = '';
-      if (score >= 8) msg = 'Amazing! You\'re a star! ★';
-      else if (score >= 5) msg = 'Good job! Keep practicing! ✨';
-      else msg = 'Nice try! Practice makes perfect! 💪';
+      if (percentage >= 90) msg = 'Perfect! You\'re a Korean master! ★';
+      else if (percentage >= 70) msg = 'Great job! Keep it up! ✨';
+      else if (percentage >= 50) msg = 'Good effort! Practice more! 💪';
+      else msg = 'Keep practicing! You can do it! 🌱';
       document.getElementById('resultMessage').textContent = msg;
     }
 
