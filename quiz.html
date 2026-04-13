@@ -253,6 +253,16 @@
       box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
     }
 
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--mint), var(--teal));
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(42, 157, 143, 0.3);
+    }
+
     .result {
       text-align: center;
     }
@@ -280,15 +290,6 @@
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html" class="logo">Korean<span>Connect</span> ♡</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="vocab.html">Vocab</a></li>
-      <li><a href="quiz.html" class="active">Quiz</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
 
   <div class="main-content">
     <div class="page-header">
@@ -319,6 +320,7 @@
       <div class="options" id="options"></div>
 
       <div class="feedback" id="feedback"></div>
+      <button class="btn btn-secondary" id="speakBtn" style="display:none">🔊 Hear Pronunciation</button>
       <button class="btn btn-primary" id="nextBtn" style="display:none">Next Question</button>
     </div>
 
@@ -402,23 +404,23 @@
       '열하나': ['열', '열둘', '열셋', '스무', '하나', '둘', '셋', '넷', '다섯'],
       '열둘': ['열', '열하나', '열셋', '열넷', '하나', '둘', '셋', '넷', '다섯'],
       '스무': ['열', '열하나', '열둘', '서른', '하나', '둘', '셋', '넷', '다섯'],
-      '안녕하세요': ['안녕', '안녕히 가세요', '감사합니다', '제발', '다음에 봐요', 'HELLO', 'HELLO', 'HELLO', 'HELLO'],
-      '감사합니다': ['안녕하세요', '부탁합니다', '죄송합니다', '고마워요', '천만에요', 'THANK', 'THANK', 'THANK', 'THANK'],
-      '안녕히 가세요': ['안녕하세요', '안녕', '다시 봐요', '다음에 봐요', '감사합니다', 'BYE', 'BYE', 'BYE', 'BYE'],
-      '부탁합니다': ['감사합니다', '부탁해요', '제발', '도와주세요', '물어봅니다', 'PLEASE', 'PLEASE', 'PLEASE', 'PLEASE'],
-      '죄송합니다': ['미안해요', '실례합니다', '감사합니다', '알겠어요', '조심할게요', 'SORRY', 'SORRY', 'SORRY', 'SORRY'],
-      '네': ['아니요', '예', '그래요', '알겠어요', '맞아요', 'YES', 'YES', 'YES', 'YES'],
-      '아니요': ['네', '예', '아녀', '아닙니다', '틀려요', 'NO', 'NO', 'NO', 'NO'],
-      '개': ['고양이', '새', '물고기', '토끼', '곰', 'DOG', 'DOG', 'DOG', 'DOG'],
-      '고양이': ['개', '새', '물고기', '토끼', '고래', 'CAT', 'CAT', 'CAT', 'CAT'],
-      '새': ['개', '고양이', '물고기', '토끼', '나비', 'BIRD', 'BIRD', 'BIRD', 'BIRD'],
-      '물고기': ['개', '고양이', '새', '토끼', '고래', 'FISH', 'FISH', 'FISH', 'FISH'],
-      '토끼': ['개', '고양이', '새', '물고기', '고양이', 'RABBIT', 'RABBIT', 'RABBIT', 'RABBIT'],
-      '밥': ['빵', '물', '사과', '바나나', '고기', 'RICE', 'RICE', 'RICE', 'RICE'],
-      '물': ['밥', '빵', '사과', '바나나', '우유', 'WATER', 'WATER', 'WATER', 'WATER'],
-      '빵': ['밥', '물', '사과', '바나나', '케이크', 'BREAD', 'BREAD', 'BREAD', 'BREAD'],
-      '사과': ['밥', '물', '빵', '바나나', '포도', 'APPLE', 'APPLE', 'APPLE', 'APPLE'],
-      '바나나': ['밥', '물', '빵', '사과', '딸기', 'BANANA', 'BANANA', 'BANANA', 'BANANA'],
+      '안녕하세요': ['안녕', '안녕히 가세요', '감사합니다', '제발', '다음에 봐요', '죄송합니다', '부탁합니다', '아니요', '네'],
+      '감사합니다': ['안녕하세요', '부탁합니다', '죄송합니다', '고마워요', '천만에요', '안녕', '네', '아니요', '다시 봐요'],
+      '안녕히 가세요': ['안녕하세요', '안녕', '다시 봐요', '다음에 봐요', '감사합니다', '부탁합니다', '죄송합니다', '네', '아니요'],
+      '부탁합니다': ['감사합니다', '부탁해요', '제발', '도와주세요', '물어봅니다', '안녕하세요', '네', '아니요', '안녕'],
+      '죄송합니다': ['미안해요', '실례합니다', '감사합니다', '알겠어요', '조심할게요', '안녕하세요', '네', '아니요', '부탁합니다'],
+      '네': ['아니요', '예', '그래요', '알겠어요', '맞아요', '아니야', '틀렸어', '좋아요', '싫어요'],
+      '아니요': ['네', '예', '아녀', '아닙니다', '틀려요', '그런데', '하지만', '근데', '그래도'],
+      '개': ['고양이', '새', '물고기', '토끼', '곰', '호랑이', '사자', '코끼리', '기린'],
+      '고양이': ['개', '새', '물고기', '토끼', '고래', '곰', '사자', '호랑이', '여우'],
+      '새': ['개', '고양이', '물고기', '토끼', '나비', '잠자리', '벌', '매', '참새'],
+      '물고기': ['개', '고양이', '새', '토끼', '고래', '돌고래', '오징어', '문어', '새우'],
+      '토끼': ['개', '고양이', '새', '물고기', '고양이', '다람쥐', '다람쥐', '쥐', '다람쥐'],
+      '밥': ['빵', '물', '사과', '바나나', '고기', '국', '찜', '구이', '찌개'],
+      '물': ['밥', '빵', '사과', '바나나', '우유', '주스', '차', '커피', '음료'],
+      '빵': ['밥', '물', '사과', '바나나', '케이크', '쿠키', '도넛', '식빵', '크로와상'],
+      '사과': ['밥', '물', '빵', '바나나', '포도', '딸기', '수박', '귤', '복숭아'],
+      '바나나': ['밥', '물', '빵', '사과', '딸기', '망고', '파인애플', '블루베리', '레몬'],
     };
 
     const numberMap = { one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10', eleven: '11', twelve: '12', thirteen: '13', fourteen: '14', fifteen: '15', twenty: '20' };
@@ -446,6 +448,17 @@
       const wrong = wrongOptions[correct] || ['보기1', '보기2', '보기3', '보기4'];
       const shuffledWrong = shuffle([...wrong]);
       return shuffle([correct, ...shuffledWrong.slice(0, 3)]);
+    }
+
+    function speakKorean(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ko-KR';
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        window.speechSynthesis.speak(utterance);
+      }
     }
 
     function initQuiz() {
@@ -526,6 +539,8 @@
       }
 
       document.getElementById('scoreDisplay').textContent = `Score: ${score}`;
+      document.getElementById('speakBtn').style.display = 'block';
+      document.getElementById('speakBtn').onclick = () => speakKorean(correct);
       document.getElementById('nextBtn').style.display = 'block';
     }
 
@@ -543,6 +558,8 @@
       const feedback = document.getElementById('feedback');
       feedback.textContent = `⏰ Time's up! Answer: ${q.answer}`;
       feedback.className = 'feedback show wrong';
+      document.getElementById('speakBtn').style.display = 'block';
+      document.getElementById('speakBtn').onclick = () => speakKorean(q.answer);
       document.getElementById('nextBtn').style.display = 'block';
     }
 
